@@ -1,10 +1,10 @@
 from collections import defaultdict
 import logging
 from math import floor
-from typing import Dict, Set, Tuple
+from typing import Set, Tuple
 
-from splitwise.types import UserId, BalanceGraph, MoneyAmount
-from splitwise.utils import show_final_results
+from splitwise.core.types import UserId, BalanceGraph, MoneyAmount
+from splitwise.core.utils import show_final_results
 
 
 MAX_ITERATIONS = 5

@@ -1,7 +1,4 @@
-import pytest
-
-from splitwise.models import User, Solver, Group, Expense
-from splitwise.utils import show_final_results
+from splitwise.core.models import User, Group, Expense
 
 
 class TestResolver:

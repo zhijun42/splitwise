@@ -1,4 +1,4 @@
-from splitwise.models import Expense, User, Group
+from splitwise.core.models import Expense, User, Group
 
 
 if __name__ == '__main__':
