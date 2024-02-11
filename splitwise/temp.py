@@ -14,7 +14,6 @@ if __name__ == '__main__':
 
     # 30 / 60 / 90 = $60 per User
     expense_1 = Expense(balance="B,A,14|C,A,14")
-    # test_group.add_expense(expense_1)
     test_group.add_delta_balance_graph(expense_1.balance_graph)
     print("[1]: ", test_group.show_balance())
 
@@ -28,5 +27,4 @@ if __name__ == '__main__':
 
     updated_expense_1 = Expense(balance="B,A,10|C,A,10")
     expense_1.update(updated_expense_1, test_group)
-    # test_group.update_expense(expense_1, updated_expense_1)
     print("[4]:", test_group.show_balance())

@@ -29,5 +29,8 @@ def cast_to_balance_string(balance_graph: BalanceGraph) -> str:
     balance_string_pairs = []
     for user_that_owes, user_balances in balance_graph.items():
         for user_that_pays, money_amount in user_balances.items():
+            if money_amount == 0:
+                continue
+
             balance_string_pairs.append(f"{user_that_owes},{user_that_pays},{money_amount}")
     return "|".join(balance_string_pairs)
