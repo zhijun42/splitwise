@@ -44,15 +44,14 @@ class Solver:
         return redundant_edges
 
     # @staticmethod
-    def combine_balance_graphs(self, new_graph: BalanceGraph) -> None:
-        print("Before merging", show_final_results(self.graph))
+    def combine_balance_graphs(self, new_graph: BalanceGraph) -> BalanceGraph:
         for user_that_owes in new_graph:
             for user_that_pays, money_amount in new_graph[user_that_owes].items():
                 self._add_expense(user_that_owes, user_that_pays, money_amount)
 
         # Doing the erasing on the fly
         self._erase_redundant_edges_amount_three_nodes()
-        print("After merging", show_final_results(self.graph))
+        return self.graph
 
     # def _new_add_expense(graph, user_that_owes: UserId, user_that_pays: UserId, money_amount: MoneyAmount) -> None:
     #     print(f"[{user_that_owes}] owes [{user_that_pays}] amount of [{money_amount}]")

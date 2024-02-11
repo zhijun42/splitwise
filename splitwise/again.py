@@ -1,47 +1,32 @@
+import django
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'splitwise.settings')
+django.setup()
+
 from splitwise.core.models import Expense, User, Group
 
 
 if __name__ == '__main__':
-    data = {
-        "B": {"A": 20, "C": 40},
-        "C": {"A": 20, "B": 30},
-        "A": {"B": 30, "C": 40}
-    }
-
-    user_A = User("A")
-    user_B = User("B")
-    user_C = User("C")
-
-    test_group = Group("TestGroup")
-    test_group.add_user(user_A)
-    test_group.add_user(user_B)
-    test_group.add_user(user_C)
+    user_A = User(name="A")
+    user_B = User(name="B")
+    user_C = User(name="C")
+    test_group = Group(title="TestGroup")
 
     # 30 / 60 / 90 = $60 per User
-    expense_1 = Expense({
-        user_B.id: {user_A.id: 14},
-        user_C.id: {user_A.id: 14},
-    })
-    test_group.add_expense(expense_1)
+    expense_1 = Expense(balance="B,A,14|C,A,14")
+    # test_group.add_expense(expense_1)
+    test_group.add_delta_balance_graph(expense_1.balance_graph)
     print("[1]: ", test_group.show_balance())
 
-    expense_2 = Expense({
-        user_A.id: {user_B.id: 20},
-        user_C.id: {user_B.id: 20},
-    })
-    test_group.add_expense(expense_2)
+    expense_2 = Expense(balance="A,B,20|C,B,20")
+    test_group.add_delta_balance_graph(expense_2.balance_graph)
     print("[2]: ", test_group.show_balance())
 
-    expense_3 = Expense({
-        user_A.id: {user_C.id: 30},
-        user_B.id: {user_C.id: 30}
-    })
-    test_group.add_expense(expense_3)
+    expense_3 = Expense(balance="A,C,30|B,C,30")
+    test_group.add_delta_balance_graph(expense_3.balance_graph)
     print("[3]: ", test_group.show_balance())
 
-    new_expense_1 = Expense({
-        user_B.id: {user_A.id: 10},
-        user_C.id: {user_A.id: 10},
-    })
-    test_group.update_expense(expense_1, new_expense_1)
+    updated_expense_1 = Expense(balance="B,A,10|C,A,10")
+    expense_1.update(updated_expense_1, test_group)
+    # test_group.update_expense(expense_1, updated_expense_1)
     print("[4]:", test_group.show_balance())

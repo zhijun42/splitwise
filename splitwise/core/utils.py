@@ -23,3 +23,11 @@ def show_final_results(graph: BalanceGraph) -> Set[Tuple[UserId, UserId, MoneyAm
             money_amount = round(money_amount, 2)
             results.add((out_node, in_node, money_amount))
     return results
+
+
+def cast_to_balance_string(balance_graph: BalanceGraph) -> str:
+    balance_string_pairs = []
+    for user_that_owes, user_balances in balance_graph.items():
+        for user_that_pays, money_amount in user_balances.items():
+            balance_string_pairs.append(f"{user_that_owes},{user_that_pays},{money_amount}")
+    return "|".join(balance_string_pairs)
